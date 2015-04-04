@@ -29,6 +29,7 @@ describe "User pages" do
         end
       end
     end
+
     describe "delete links" do
 
       it { should_not have_link('delete') }
@@ -41,12 +42,15 @@ describe "User pages" do
         end
 
         it { should have_link('delete', href: user_path(User.first)) }
+
         it "should be able to delete another user" do
           expect do
             click_link('delete', match: :first)
           end.to change(User, :count).by(-1)
         end
+
         it { should_not have_link('delete', href: user_path(admin)) }
+              
       end
     end
   end
@@ -119,12 +123,12 @@ describe "User pages" do
         	fill_in "Name",         with: "Example User"
         	fill_in "Email",        with: "user@example.com"
         	fill_in "Password",     with: "foobar"
-        	fill_in "Confirmation",     with: "foobar123"
+        	fill_in "Confirm Password",     with: "foobar123"
         	click_button submit
         end
  		
- 		it { should have_title('Sign up') }
-     	it { should have_content('Password confirmation doesn\'t match Password') }
+ 		    it { should have_title('Sign up') }
+     	  it { should have_content('Password confirmation doesn\'t match Password') }
       end
 
     end
@@ -134,7 +138,7 @@ describe "User pages" do
         fill_in "Name",         with: "Example User"
         fill_in "Email",        with: "user@example.com"
         fill_in "Password",     with: "foobar"
-        fill_in "Confirmation", with: "foobar"
+        fill_in "Confirm Password", with: "foobar"
       end
 
       it "should create a user" do
